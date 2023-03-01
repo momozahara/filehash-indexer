@@ -1,5 +1,5 @@
 # FileHash-Indexer
-A tool use to read files hash recursively at a specific part and store into json format
+A tool use to read files hash recursively at a specific path and store into json format
 
 ## Installation
 ### Installer
