@@ -2,6 +2,8 @@
 A tool use to read files hash recursively at a specific part and store into json format
 
 ## Installation
+### Installer
+- [Release](https://github.com/momozahara/filehash-indexer/releases/latest)
 ### Remote
 ```
 cargo install --git https://github.com/momozahara/filehash-indexer.git
