@@ -44,13 +44,18 @@ fn main() -> io::Result<()> {
         .get_matches();
 
     let path = matches.get_one::<String>("path").unwrap();
-
-    let origin_dir = env::current_dir()?;
-    env::set_current_dir(Path::new(path))?;
-
     let ver = matches.get_one::<String>("version").unwrap();
     let pretty = matches.get_one::<bool>("pretty").unwrap();
     let print = matches.get_one::<bool>("print").unwrap();
+
+    let out_path = env::current_dir()?.join("out");
+    let put_file = &format!("index-{}.json", ver);
+    if out_path.join(put_file).exists() {
+        eprint(&format!("index version {ver} already existed"));
+    }
+
+    let origin_dir = env::current_dir()?;
+    env::set_current_dir(Path::new(path))?;
 
     // source: https://regex101.com/r/JOytBR/1/codegen?language=rust
     let regex = Regex::new(r"(?m)^(?P<major>0|[1-9]\d*)\.(?P<minor>0|[1-9]\d*)\.(?P<patch>0|[1-9]\d*)(?:-(?P<prerelease>(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*)(?:\.(?:0|[1-9]\d*|\d*[a-zA-Z-][0-9a-zA-Z-]*))*))?(?:\+(?P<buildmetadata>[0-9a-zA-Z-]+(?:\.[0-9a-zA-Z-]+)*))?$").unwrap();
@@ -96,15 +101,16 @@ fn main() -> io::Result<()> {
 
     env::set_current_dir(origin_dir)?;
     let out_path = env::current_dir()?.join("out");
+    let put_file = &format!("index-{}.json", ver);
     if !out_path.exists() {
         fs::create_dir_all(&out_path)?;
     }
-    fs::write(out_path.join("index.json"), json)?;
+    fs::write(out_path.join(put_file), json)?;
 
     println!(
         "{}: {}",
         "success".bold().bright_green(),
-        out_path.join("index.json").as_os_str().to_str().unwrap()
+        out_path.join(put_file).as_os_str().to_str().unwrap()
     );
 
     Ok(())

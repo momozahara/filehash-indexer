@@ -22,13 +22,13 @@ hash-indexer
 --print # optional
 ```
 ```
-hash-indexer -p .\src\ -v 1.0.0-alpha1 --pretty --print
+hash-indexer -p .\src\ -v 1.0.1-alpha1 --pretty --print
 ```
 
 ## Format
 ```json
 {
-  "version": "1.0.0-alpha1",
+  "version": "1.0.1-alpha1",
   "assets": [
     {
       "path": ".\\main.rs",
