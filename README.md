@@ -25,6 +25,11 @@ hash-indexer
 hash-indexer -p .\src\ -v 1.0.1-alpha1 --pretty --print
 ```
 
+## Test
+```
+cargo test
+```
+
 ## Format
 ```json
 {

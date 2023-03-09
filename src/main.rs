@@ -13,6 +13,9 @@ use std::{
     sync::Mutex,
 };
 
+#[cfg(test)]
+mod test;
+
 #[derive(Serialize, Deserialize, Clone)]
 struct Version {
     version: String,
