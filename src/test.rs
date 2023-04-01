@@ -21,7 +21,11 @@ fn test_hash() {
 fn visit_dirs() {
     crate::visit_dirs(Path::new("test"), &|entry| {
         let path = entry.path();
-        assert_eq!(path.as_os_str().to_str().unwrap(), "test\\test.txt")
+        if cfg!(target_os = "windows") {
+            assert_eq!(path.as_os_str().to_str().unwrap(), "test\\test.txt")
+        } else if cfg!(target_os = "linux") {
+            assert_eq!(path.as_os_str().to_str().unwrap(), "test/test.txt")
+        }
     })
     .unwrap();
 }
