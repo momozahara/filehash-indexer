@@ -40,7 +40,7 @@ fn main() -> io::Result<()> {
                 .required(false),
         )
         .arg(
-            arg!(--print <value>)
+            arg!(--verbose <value>)
                 .action(ArgAction::SetTrue)
                 .required(false),
         )
@@ -49,7 +49,7 @@ fn main() -> io::Result<()> {
     let path = matches.get_one::<String>("path").unwrap();
     let ver = matches.get_one::<String>("version").unwrap();
     let pretty = matches.get_one::<bool>("pretty").unwrap();
-    let print = matches.get_one::<bool>("print").unwrap();
+    let verbose = matches.get_one::<bool>("verbose").unwrap();
 
     let out_path = env::current_dir()?.join("out");
     let put_file = &format!("index-{}.json", ver);
@@ -79,7 +79,7 @@ fn main() -> io::Result<()> {
         let digest = sha256_digest(reader).unwrap();
         let hash = HEXUPPER.encode(digest.as_ref()).to_lowercase();
 
-        if cfg!(debug_assertions) || *print {
+        if cfg!(debug_assertions) || *verbose {
             println!("{} {}", hash, path);
         }
         paths.push(FileData { path, hash });

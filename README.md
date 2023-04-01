@@ -19,10 +19,10 @@ hash-indexer
 --path -p <value>
 --version -v <value> #format https://regex101.com/r/JOytBR/1/codegen?language=rust
 --pretty # optional
---print # optional
+--verbose # optional
 ```
 ```
-hash-indexer -p .\src\ -v 1.0.1-alpha1 --pretty --print
+hash-indexer -p .\src\ -v 1.0.1-alpha1 --pretty --verbose
 ```
 
 ## Test
